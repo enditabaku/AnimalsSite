@@ -16,9 +16,9 @@ export default function Header () {
                         <img src={logo} className={`logo`} onClick={() => {navigate("/")}}/>
                     </div>
                     <div className="col-6 ta-center">
-                        <span className="fs-22 p-3">Animal1</span>
-                        <span className="fs-22 p-3">Animal1</span>
-                        <span className="fs-22 p-3">Animal1</span>
+                        <span className="fs-22 p-3">Dogs</span>
+                        <span className="fs-22 p-3">Cats</span>
+                        <span className="fs-22 p-3">Birds</span>
                     </div>
                 </div>
             </div>

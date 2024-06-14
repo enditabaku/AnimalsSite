@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/Hooks";
 import { fetchGallery } from "../../store/actions/GalleryAction";
 import LoadImage from "./LoadImage";
-import { IImage } from "../../model/ImageModel";
 import './List.css';
 
 // 3rd party
@@ -53,7 +52,7 @@ export const ListView = () => {
             </>
           ) : (
             <>
-              {galleryValue?.gallery?.data?.map((img: IImage) => (
+              {galleryValue?.gallery?.data?.map((img: any) => (
                 <div className="grid__item" key={img.id}>
                   <div className="card">
                     <img className="card__img" src={img?.images?.length > 0 ? (img?.images[0]?.type == "video/mp4" ? img?.images[0].gifv.slice(0, -1) : img?.images[0].link) : (img?.type == "video/mp4" ? img.gifv.slice(0, -1) : img?.link)} alt={img?.title} />
