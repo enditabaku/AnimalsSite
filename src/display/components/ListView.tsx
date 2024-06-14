@@ -18,7 +18,7 @@ export const ListView = () => {
   const [paramsObject, setParamsObject] = useState<any>({});
 
   useEffect(() => {
-    dispatch(fetchGallery({type: 'dogs'}))
+    dispatch(fetchGallery({type: 'birds'}))
   }, [paramsObject]);
 
   const filtersChangeHandler = (newValues: any) => {
@@ -33,6 +33,7 @@ export const ListView = () => {
     </div>
     )
   }
+
 
   return (
     <>
@@ -52,13 +53,14 @@ export const ListView = () => {
             </>
           ) : (
             <>
-              {galleryValue?.gallery?.data?.map((img: any) => (
-                <div className="grid__item" key={img.id}>
+              {galleryValue?.gallery?.map((animal: any) => (
+                <div className="grid__item" key={animal.id}>
                   <div className="card">
-                    <img className="card__img" src={img?.images?.length > 0 ? (img?.images[0]?.type == "video/mp4" ? img?.images[0].gifv.slice(0, -1) : img?.images[0].link) : (img?.type == "video/mp4" ? img.gifv.slice(0, -1) : img?.link)} alt={img?.title} />
+                    <img className="card__img" src={animal.image} alt={animal?.title} />
                     <div className="card__content">
-                      <p className="card__text">{img?.title}</p>
-                      <button className="card__btn" onClick={() => {navigate(`/gallery/${img.id}`, {state: img})}}>View details</button>
+                      <p className="card__text">{animal?.name}</p>
+                      <p className="card__text">{animal?.origin ?? animal.family}</p>
+                      <button className="card__btn" onClick={() => {navigate(`/gallery/${animal.id}`, {state: animal})}}>View details</button>
                     </div>
                   </div>
                 </div>
