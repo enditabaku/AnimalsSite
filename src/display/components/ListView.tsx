@@ -1,29 +1,16 @@
-// react imports
-import { useEffect, useState } from "react";
+import React, {useState} from 'react'
 
 // project imports
-import { useAppDispatch, useAppSelector } from "../../store/Hooks";
-import { fetchGallery } from "../../store/actions/GalleryAction";
 import LoadImage from "./LoadImage";
 import './List.css';
+import Popup from './Popup';
 
 // 3rd party
 import { useNavigate } from "react-router-dom";
 
-export const ListView = () => {
-  const dispatch = useAppDispatch();
+export const ListView = ({galleryValue}: {galleryValue: any}) => {
   const navigate = useNavigate();
-
-  const galleryValue = useAppSelector((state) => state.gallery);
-  const [paramsObject, setParamsObject] = useState<any>({});
-
-  useEffect(() => {
-    dispatch(fetchGallery({type: 'birds'}))
-  }, [paramsObject]);
-
-  const filtersChangeHandler = (newValues: any) => {
-    setParamsObject(newValues)
-  }
+  const [selectedAnimal, setSelectedAnimal] = useState<any>(null);
 
 
   if(galleryValue?.error?.length > 0){
@@ -60,7 +47,7 @@ export const ListView = () => {
                     <div className="card__content">
                       <p className="card__text">{animal?.name}</p>
                       <p className="card__text">{animal?.origin ?? animal.family}</p>
-                      <button className="card__btn" onClick={() => {navigate(`/gallery/${animal.id}`, {state: animal})}}>View details</button>
+                      <button className="card__btn" onClick={() => {setSelectedAnimal(animal)}}>View details</button>
                     </div>
                   </div>
                 </div>
@@ -69,6 +56,10 @@ export const ListView = () => {
           )}
         </div>
       </div>
+
+      {selectedAnimal && (
+        <Popup animal={selectedAnimal} onClose={() => setSelectedAnimal(null)} />
+      )}
     </>
   );
 };

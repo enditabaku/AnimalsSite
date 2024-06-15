@@ -2,12 +2,12 @@
 import background from '../../assets/images/bg.png'
 import Header from "../Header";
 
-export default function Intro() {
+interface Props {
+  selectedType: 'dogs' | 'cats' | 'birds'
+  handleTypeChange: any
+}
 
-  // Function to handle animal type change
-  const handleAnimalTypeChange = (type: string) => {
-    alert(`Selected animal type: ${type}`);
-  }
+export default function Intro({selectedType, handleTypeChange}:Props) {
 
   return (
     <>
@@ -15,7 +15,7 @@ export default function Intro() {
         <div className="row">
           <div className="col-8" style={{ backgroundImage: `url(${background})` }}>
             {/* Pass the handler to the Header component */}
-            <Header onAnimalTypeChange={handleAnimalTypeChange} />
+            <Header onAnimalTypeChange={handleTypeChange} type={selectedType}/>
             <p className="large-text fs-45">
               Connecting You with the Animal World<br />
               Discover, Care, and Cherish!
